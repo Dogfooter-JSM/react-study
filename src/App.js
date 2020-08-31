@@ -1,19 +1,32 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
-import Menu from './ssr-recipe/components/Menu';
-import RedPage from './ssr-recipe/pages/RedPage';
-import BluePage from './ssr-recipe/pages/BluePage';
+import ColorBox from './context-api/components/ColorBox';
+// import ColorContext from './context-api/contexts/color';
+import { ColorProvider } from './context-api/contexts/color';
+import SelectColors from './context-api/components/SelectColors';
 
 const App = () => {
-  //
   return (
+    <ColorProvider>
+      <div>
+        <SelectColors />
+        <ColorBox />
+      </div>
+    </ColorProvider>
+
+    /*
+    // Provider를 사용하여 Context의 value값을 변경
+    // Provider를 사용할 때는 value값을 명시해 주어야 제대로 작동한다.
+    <ColorContext.Provider value={{ color: 'red' }}>
+      <div>
+        <ColorBox />
+      </div>
+    </ColorContext.Provider>
+    /*
     <div>
-      <Menu />
-      <hr />
-      <Route path='/red' component={RedPage} />
-      <Route path='/blue' component={BluePage} />
+      <ColorBox />
     </div>
+    */
   );
-};
+}
 
 export default App;

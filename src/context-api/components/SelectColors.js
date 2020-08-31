@@ -1,45 +1,49 @@
-import React, { Component } from 'react';
-// import { ColorConsumer } from '../contexts/color';
+import React, { useContext } from 'react';
 import ColorContext from '../contexts/color';
 
 const color = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet'];
 
-/*
 const SelectColors = () => {
+  // 클래스형 컴포넌트에서는 Render Props 패턴(children에 함수를 전달)을 사용해야 한다.
+  const { actions } = useContext(ColorContext); // actions: { setColor, setSubcolor }
+
   return (
     <div>
       <h2>색상을 선택하세요.</h2>
-      <ColorConsumer>
-        {/* ColorConsumer.actions를 파라미터로하는 함수를 ColorContext로 넘긴다. *//*}
-        {({ actions }) => (
-          <div style={{ display: 'flex' }}>
-            {color.map(color => (
-              <div
-                key={color}
-                style={{
-                  background: color,
-                  width: '24px',
-                  height: '24px',
-                  cursor: 'pointer'
-                }}
-                // 메인 컬러 변경
-                onClick={() => actions.setColor(color)}
-                onContextMenu={e => {
-                  // 마우스 오른쪽 버튼 클릭 시 메뉴가 뜨는 것을 무시함
-                  e.preventDefault();
-                  // 서브 컬러 변경
-                  actions.setSubcolor(color);
-                }}
-              />
-            ))}
-          </div>
-        )}
-      </ColorConsumer>
+      {/* <ColorConsumer> */}
+      {/* ColorConsumer.actions를 파라미터로하는 함수를 ColorContext로 넘긴다. */}
+      {/* {({ actions }) => ( */}
+      <div style={{ display: 'flex' }}>
+        {color.map(color => (
+          <div
+            key={color}
+            style={{
+              background: color,
+              width: '24px',
+              height: '24px',
+              cursor: 'pointer'
+            }}
+            // 메인 컬러 변경
+            onClick={() => actions.setColor(color)}
+            onContextMenu={e => {
+              // 마우스 오른쪽 버튼 클릭 시 메뉴가 뜨는 것을 무시함
+              e.preventDefault();
+              // 서브 컬러 변경
+              actions.setSubcolor(color);
+            }}
+          />
+        ))}
+      </div>
+      {/* )} */}
+      {/* </ColorConsumer> */}
       <hr />
     </div>
   );
 };
-*/
+
+/*
+import React, { Component } from 'react';
+import ColorContext from '../contexts/color';
 
 // 클래스형 컴포넌트에서 Context를 좀 더 쉽게 사용하고 싶다면 contextType를 정의
 class SelectColors extends Component {
@@ -85,5 +89,6 @@ class SelectColors extends Component {
     );
   }
 }
+*/
 
 export default SelectColors;
