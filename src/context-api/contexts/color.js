@@ -27,7 +27,9 @@ const ColorProvider = ({children}) => {
     actions: {setColor, setSubcolor}
   };
 
+  // color, subcolor 값이 바뀌면 새로 그려진다. --> {children} from App
   return (
+    // children : <div> <SelectColors /> <ColorBox /> </div>
     <ColorContext.Provider value={value}>{children}</ColorContext.Provider>
   );
 };
