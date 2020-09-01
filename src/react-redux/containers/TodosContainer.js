@@ -7,12 +7,12 @@ import Todos from '../components/Todos';
 // 액션 생성 함수
 import { changeInput, insert, toggle, remove } from '../modules/todos';
 // useActions 사용
-import useActions from '../../lib/useActions';
+import useActions from '../lib/useActions';
 
 const TodosContainer = () => {
   const { input, todos } = useSelector(({ todos }) => ({
     input: todos.input,
-    todos: todos.todos
+    todos: todos.todos,
   }));
 
   /*
@@ -23,10 +23,7 @@ const TodosContainer = () => {
   const onRemove = useCallback(id => dispatch(remove(id)), [dispatch]);
   */
 
-  const [onChangeInput, onInsert, onToggle, onRemove] = useActions(
-    [changeInput, insert, toggle, remove],
-    []
-  );
+  const [onChangeInput, onInsert, onToggle, onRemove] = useActions([changeInput, insert, toggle, remove], []);
 
   return (
     <Todos
@@ -38,7 +35,7 @@ const TodosContainer = () => {
       onRemove={onRemove}
     />
   );
-}
+};
 
 // connect 함수 사용 시 해당 부모 컴포넌트 리렌더링될 때 해당 컴포넌트의 props가 바뀌지 않았다면 리렌더링 방지됨
 // useSelector를 사용하여 리덕스 상태를 조회했을 때는 성능 최적화를 위해 React.memo를 컨테이너 컴포넌트에 사용
