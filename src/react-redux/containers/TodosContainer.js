@@ -1,29 +1,31 @@
 /** useSelector & useDispatch 사용 */
-// import React, { useCallback } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import Todos from '../components/Todos';
 // 액션 생성 함수
 import { changeInput, insert, toggle, remove } from '../modules/todos';
+
 // useActions 사용
-import useActions from '../lib/useActions';
+// import useActions from '../lib/useActions';
 
 const TodosContainer = () => {
+  // connect 함수 대신 useSelector 함수를 사용하여 상태 값 조회
+  // 상태 선택 함수는 mapStateToProps와 같은 형태를 갖는다.
   const { input, todos } = useSelector(({ todos }) => ({
     input: todos.input,
     todos: todos.todos,
   }));
 
-  /*
+  // useDispatch 함수 : 스토어 내장함수인 dispatch를 사용할 수 있다.
+  // dispatch(increase(), decrease())
   const dispatch = useDispatch();
-  const onChangeInput = useCallback(input => dispatch(changeInput(input)), [dispatch]);
-  const onInsert = useCallback(text => dispatch(insert(text)), [dispatch]);
-  const onToggle = useCallback(id => dispatch(toggle(id)), [dispatch]);
-  const onRemove = useCallback(id => dispatch(remove(id)), [dispatch]);
-  */
+  const onChangeInput = useCallback((input) => dispatch(changeInput(input)), [dispatch]);
+  const onInsert = useCallback((text) => dispatch(insert(text)), [dispatch]);
+  const onToggle = useCallback((id) => dispatch(toggle(id)), [dispatch]);
+  const onRemove = useCallback((id) => dispatch(remove(id)), [dispatch]);
 
-  const [onChangeInput, onInsert, onToggle, onRemove] = useActions([changeInput, insert, toggle, remove], []);
+  // const [onChangeInput, onInsert, onToggle, onRemove] = useActions([changeInput, insert, toggle, remove], []);
 
   return (
     <Todos

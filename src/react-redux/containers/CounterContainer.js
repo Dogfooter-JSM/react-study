@@ -7,9 +7,16 @@ import { increase, decrease } from '../modules/counter';
 
 // 리덕스와 연동하여 사용할 컨테이너 정의
 const CounterContainer = () => {
+  
+  // connect 함수 대신 useSelector 함수를 사용하여 상태 값 조회
+  // 상태 선택 함수는 mapStateToProps와 같은 형태를 갖는다.
   const number = useSelector(state => state.counter.number);
+  
+  // useDispatch 함수 : 스토어 내장함수인 dispatch를 사용할 수 있다.
+  // dispatch(increase(), decrease())
   const dispatch = useDispatch();
-  // 함수 재생성을 막는다. : useDispatch를 사용할 때는 useCallback과 함께 사용하도록 한다.
+
+  // useDispatch를 사용할 때는 useCallback과 함께 사용하여 함수 재생성을 막는다.
   const onIncrease = useCallback(() => dispatch(increase()), [dispatch]);
   const onDecrease = useCallback(() => dispatch(decrease()), [dispatch]);
 
@@ -22,14 +29,16 @@ const CounterContainer = () => {
   );
 };
 
-export default CounterContainer;
-
 /** useStore Hooks를 사용하여 내부에서 리덕스 스토어 객체를 직접 사용하는 방법 */
 /*
 const store = useStore();
 store.dispatch({ type: 'SAMPLE_ACTION'});
 store.getState();
 */
+
+export default CounterContainer;
+
+
 
 /*
 import React from 'react';
